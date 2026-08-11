@@ -1,0 +1,46 @@
+{
+  "name": "pr-risk-card",
+  "version": "0.1.0",
+  "description": "Deterministic PR risk card from a unified diff — path rules, size, secret-like regex; no LLM",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "pr-risk-card": "./dist/cli.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "action.yml",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "demo": "node --import tsx src/cli.ts --diff fixtures/risky.diff",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.8"
+  },
+  "keywords": [
+    "pull-request",
+    "diff",
+    "risk",
+    "review",
+    "secrets",
+    "github-actions",
+    "deterministic"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dtaylor2698/pr-risk-card.git"
+  }
+}

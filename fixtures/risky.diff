@@ -1,0 +1,253 @@
+diff --git a/.github/workflows/deploy.yml b/.github/workflows/deploy.yml
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/.github/workflows/deploy.yml
+@@ -0,0 +1,12 @@
++name: Deploy
++on: push
++jobs:
++  ship:
++    runs-on: ubuntu-latest
++    steps:
++      - uses: actions/checkout@v4
++      - run: echo "deploy"
++      - name: Configure
++        env:
++          AWS_ACCESS_KEY_ID: AKIAIOSFODNN7EXAMPLE
++          NOTE: fixture-only fake key for tests
+diff --git a/.env b/.env
+new file mode 100644
+index 0000000..2222222
+--- /dev/null
++++ b/.env
+@@ -0,0 +1,3 @@
++DATABASE_URL=postgres://local/dev
++API_KEY="sk_test_fixture_not_real_12345"
++GITHUB_TOKEN=ghp_abcdefghijklmnopqrstuvwxyz0123456789
+diff --git a/src/bulk_generated.ts b/src/bulk_generated.ts
+new file mode 100644
+index 0000000..3333333
+--- /dev/null
++++ b/src/bulk_generated.ts
+@@ -0,0 +1,220 @@
++export const ROW_001 = 1;
++export const ROW_002 = 2;
++export const ROW_003 = 3;
++export const ROW_004 = 4;
++export const ROW_005 = 5;
++export const ROW_006 = 6;
++export const ROW_007 = 7;
++export const ROW_008 = 8;
++export const ROW_009 = 9;
++export const ROW_010 = 10;
++export const ROW_011 = 11;
++export const ROW_012 = 12;
++export const ROW_013 = 13;
++export const ROW_014 = 14;
++export const ROW_015 = 15;
++export const ROW_016 = 16;
++export const ROW_017 = 17;
++export const ROW_018 = 18;
++export const ROW_019 = 19;
++export const ROW_020 = 20;
++export const ROW_021 = 21;
++export const ROW_022 = 22;
++export const ROW_023 = 23;
++export const ROW_024 = 24;
++export const ROW_025 = 25;
++export const ROW_026 = 26;
++export const ROW_027 = 27;
++export const ROW_028 = 28;
++export const ROW_029 = 29;
++export const ROW_030 = 30;
++export const ROW_031 = 31;
++export const ROW_032 = 32;
++export const ROW_033 = 33;
++export const ROW_034 = 34;
++export const ROW_035 = 35;
++export const ROW_036 = 36;
++export const ROW_037 = 37;
++export const ROW_038 = 38;
++export const ROW_039 = 39;
++export const ROW_040 = 40;
++export const ROW_041 = 41;
++export const ROW_042 = 42;
++export const ROW_043 = 43;
++export const ROW_044 = 44;
++export const ROW_045 = 45;
++export const ROW_046 = 46;
++export const ROW_047 = 47;
++export const ROW_048 = 48;
++export const ROW_049 = 49;
++export const ROW_050 = 50;
++export const ROW_051 = 51;
++export const ROW_052 = 52;
++export const ROW_053 = 53;
++export const ROW_054 = 54;
++export const ROW_055 = 55;
++export const ROW_056 = 56;
++export const ROW_057 = 57;
++export const ROW_058 = 58;
++export const ROW_059 = 59;
++export const ROW_060 = 60;
++export const ROW_061 = 61;
++export const ROW_062 = 62;
++export const ROW_063 = 63;
++export const ROW_064 = 64;
++export const ROW_065 = 65;
++export const ROW_066 = 66;
++export const ROW_067 = 67;
++export const ROW_068 = 68;
++export const ROW_069 = 69;
++export const ROW_070 = 70;
++export const ROW_071 = 71;
++export const ROW_072 = 72;
++export const ROW_073 = 73;
++export const ROW_074 = 74;
++export const ROW_075 = 75;
++export const ROW_076 = 76;
++export const ROW_077 = 77;
++export const ROW_078 = 78;
++export const ROW_079 = 79;
++export const ROW_080 = 80;
++export const ROW_081 = 81;
++export const ROW_082 = 82;
++export const ROW_083 = 83;
++export const ROW_084 = 84;
++export const ROW_085 = 85;
++export const ROW_086 = 86;
++export const ROW_087 = 87;
++export const ROW_088 = 88;
++export const ROW_089 = 89;
++export const ROW_090 = 90;
++export const ROW_091 = 91;
++export const ROW_092 = 92;
++export const ROW_093 = 93;
++export const ROW_094 = 94;
++export const ROW_095 = 95;
++export const ROW_096 = 96;
++export const ROW_097 = 97;
++export const ROW_098 = 98;
++export const ROW_099 = 99;
++export const ROW_100 = 100;
++export const ROW_101 = 101;
++export const ROW_102 = 102;
++export const ROW_103 = 103;
++export const ROW_104 = 104;
++export const ROW_105 = 105;
++export const ROW_106 = 106;
++export const ROW_107 = 107;
++export const ROW_108 = 108;
++export const ROW_109 = 109;
++export const ROW_110 = 110;
++export const ROW_111 = 111;
++export const ROW_112 = 112;
++export const ROW_113 = 113;
++export const ROW_114 = 114;
++export const ROW_115 = 115;
++export const ROW_116 = 116;
++export const ROW_117 = 117;
++export const ROW_118 = 118;
++export const ROW_119 = 119;
++export const ROW_120 = 120;
++export const ROW_121 = 121;
++export const ROW_122 = 122;
++export const ROW_123 = 123;
++export const ROW_124 = 124;
++export const ROW_125 = 125;
++export const ROW_126 = 126;
++export const ROW_127 = 127;
++export const ROW_128 = 128;
++export const ROW_129 = 129;
++export const ROW_130 = 130;
++export const ROW_131 = 131;
++export const ROW_132 = 132;
++export const ROW_133 = 133;
++export const ROW_134 = 134;
++export const ROW_135 = 135;
++export const ROW_136 = 136;
++export const ROW_137 = 137;
++export const ROW_138 = 138;
++export const ROW_139 = 139;
++export const ROW_140 = 140;
++export const ROW_141 = 141;
++export const ROW_142 = 142;
++export const ROW_143 = 143;
++export const ROW_144 = 144;
++export const ROW_145 = 145;
++export const ROW_146 = 146;
++export const ROW_147 = 147;
++export const ROW_148 = 148;
++export const ROW_149 = 149;
++export const ROW_150 = 150;
++export const ROW_151 = 151;
++export const ROW_152 = 152;
++export const ROW_153 = 153;
++export const ROW_154 = 154;
++export const ROW_155 = 155;
++export const ROW_156 = 156;
++export const ROW_157 = 157;
++export const ROW_158 = 158;
++export const ROW_159 = 159;
++export const ROW_160 = 160;
++export const ROW_161 = 161;
++export const ROW_162 = 162;
++export const ROW_163 = 163;
++export const ROW_164 = 164;
++export const ROW_165 = 165;
++export const ROW_166 = 166;
++export const ROW_167 = 167;
++export const ROW_168 = 168;
++export const ROW_169 = 169;
++export const ROW_170 = 170;
++export const ROW_171 = 171;
++export const ROW_172 = 172;
++export const ROW_173 = 173;
++export const ROW_174 = 174;
++export const ROW_175 = 175;
++export const ROW_176 = 176;
++export const ROW_177 = 177;
++export const ROW_178 = 178;
++export const ROW_179 = 179;
++export const ROW_180 = 180;
++export const ROW_181 = 181;
++export const ROW_182 = 182;
++export const ROW_183 = 183;
++export const ROW_184 = 184;
++export const ROW_185 = 185;
++export const ROW_186 = 186;
++export const ROW_187 = 187;
++export const ROW_188 = 188;
++export const ROW_189 = 189;
++export const ROW_190 = 190;
++export const ROW_191 = 191;
++export const ROW_192 = 192;
++export const ROW_193 = 193;
++export const ROW_194 = 194;
++export const ROW_195 = 195;
++export const ROW_196 = 196;
++export const ROW_197 = 197;
++export const ROW_198 = 198;
++export const ROW_199 = 199;
++export const ROW_200 = 200;
++export const ROW_201 = 201;
++export const ROW_202 = 202;
++export const ROW_203 = 203;
++export const ROW_204 = 204;
++export const ROW_205 = 205;
++export const ROW_206 = 206;
++export const ROW_207 = 207;
++export const ROW_208 = 208;
++export const ROW_209 = 209;
++export const ROW_210 = 210;
++export const ROW_211 = 211;
++export const ROW_212 = 212;
++export const ROW_213 = 213;
++export const ROW_214 = 214;
++export const ROW_215 = 215;
++export const ROW_216 = 216;
++export const ROW_217 = 217;
++export const ROW_218 = 218;
++export const ROW_219 = 219;
++export const ROW_220 = 220;

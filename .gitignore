@@ -1,0 +1,14 @@
+node_modules/
+dist/
+coverage/
+*.log
+.DS_Store
+*.tsbuildinfo
+.pr-risk-card.md
+pr-risk-card.md
+
+__pycache__/
+.pytest_cache/
+.venv/
+venv/
+Thumbs.db

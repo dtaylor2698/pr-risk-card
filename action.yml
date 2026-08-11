@@ -1,0 +1,83 @@
+name: PR Risk Card
+description: Emit a deterministic markdown PR risk card from a unified diff (path, size, secret-like rules; no LLM)
+author: pr-risk-card
+
+inputs:
+  diff-file:
+    description: Path to a unified diff file (file-mode input). If empty, uses git diff against base-ref.
+    required: false
+    default: ""
+  base-ref:
+    description: Git ref to diff against when diff-file is empty (e.g. origin/main)
+    required: false
+    default: origin/main
+  output:
+    description: Path to write the markdown risk card
+    required: false
+    default: pr-risk-card.md
+  fail-on:
+    description: Fail the job when overall risk is at or above this level (none|medium|high|critical)
+    required: false
+    default: "none"
+  large-file-lines:
+    description: Added-line threshold for size-large-file findings
+    required: false
+    default: "200"
+  large-pr-lines:
+    description: Total added-line threshold for size-large-pr findings
+    required: false
+    default: "500"
+
+outputs:
+  risk-level:
+    description: Overall risk level (low|medium|high|critical)
+    value: ${{ steps.run.outputs.risk-level }}
+  card-path:
+    description: Path to the written markdown card
+    value: ${{ steps.run.outputs.card-path }}
+  finding-count:
+    description: Number of findings
+    value: ${{ steps.run.outputs.finding-count }}
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: "20"
+
+    - name: Install pr-risk-card
+      shell: bash
+      working-directory: ${{ github.action_path }}
+      run: |
+        npm ci
+        npm run build
+
+    - name: Generate risk card
+      id: run
+      shell: bash
+      working-directory: ${{ github.workspace }}
+      env:
+        ACTION_PATH: ${{ github.action_path }}
+        INPUT_DIFF_FILE: ${{ inputs.diff-file }}
+        INPUT_BASE_REF: ${{ inputs.base-ref }}
+        INPUT_OUTPUT: ${{ inputs.output }}
+        INPUT_FAIL_ON: ${{ inputs.fail-on }}
+        INPUT_LARGE_FILE: ${{ inputs.large-file-lines }}
+        INPUT_LARGE_PR: ${{ inputs.large-pr-lines }}
+      run: |
+        set -euo pipefail
+        ARGS=(--output "${INPUT_OUTPUT}" --fail-on "${INPUT_FAIL_ON}" --large-file-lines "${INPUT_LARGE_FILE}" --large-pr-lines "${INPUT_LARGE_PR}" --github-output)
+        if [ -n "${INPUT_DIFF_FILE}" ]; then
+          ARGS+=(--diff "${INPUT_DIFF_FILE}")
+        else
+          TMP="$(mktemp)"
+          git diff "${INPUT_BASE_REF}...HEAD" > "${TMP}" || true
+          ARGS+=(--diff "${TMP}")
+        fi
+        node "${ACTION_PATH}/dist/cli.js" "${ARGS[@]}"
+
+branding:
+  icon: alert
+  color: orange

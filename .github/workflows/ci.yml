@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Test
+        run: npm test
+
+      - name: CLI help
+        run: node dist/cli.js --help
+
+      - name: Fixture demo (risky → high/critical)
+        run: |
+          set -euo pipefail
+          node dist/cli.js --diff fixtures/risky.diff --output /tmp/risky-card.md
+          grep -E 'overall risk:\s*\*\*(high|critical)\*\*' /tmp/risky-card.md
+          node dist/cli.js --diff fixtures/safe.diff --output /tmp/safe-card.md
+          grep -E 'overall risk:\s*\*\*low\*\*' /tmp/safe-card.md
